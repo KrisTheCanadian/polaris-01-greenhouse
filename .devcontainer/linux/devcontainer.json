@@ -1,0 +1,38 @@
+{
+    "name": "Polaris Greenhouse",
+    "dockerComposeFile": "docker-compose.yml",
+    "workspaceFolder": "/home/python/workspace",
+    "service": "polaris-greenhouse",
+    "mounts": [
+        "source=~/.ssh/,target=/home/python/.ssh/,type=bind",
+        "source=~/.gnupg/,target=/home/python/.gnupg/,type=bind",
+        "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
+    ],
+    "remoteUser": "python",
+    "postCreateCommand": "echo 'export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt' >> ~/.bashrc && echo 'export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt' >> ~/.zshrc && git config --global --add safe.directory /home/python/workspace && cd /home/python/workspace && pip3 install -r requirements.txt",
+    "containerEnv": {
+        "NODE_EXTRA_CA_CERTS": "/etc/ssl/certs/ca-certificates.crt"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.black-formatter",
+                "ms-python.debugpy",
+                "hbenl.vscode-test-explorer",
+                "njpwerner.autodocstring"
+            ],
+            "settings": {
+                "git.path": "/usr/bin/git",
+                "remoteEnv": {
+                    "NODE_EXTRA_CA_CERTS": "/etc/ssl/certs/ca-certificates.crt"
+                },
+                "containerEnv": {
+                    "NODE_EXTRA_CA_CERTS": "/etc/ssl/certs/ca-certificates.crt"
+                }
+            }
+        }
+    }
+}

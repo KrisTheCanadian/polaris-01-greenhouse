@@ -1,0 +1,14 @@
+services:
+  polaris-greenhouse:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: polaris-greenhouse
+    working_dir: /home/python/workspace
+    volumes:
+      - ../..:/home/python/workspace
+      - ~/.ssh/:/home/python/.ssh/
+    network_mode: "host"
+
+volumes:
+  oracle-volume: {}
